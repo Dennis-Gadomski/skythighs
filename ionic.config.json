@@ -1,0 +1,7 @@
+{
+  "name": "skythighs",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
