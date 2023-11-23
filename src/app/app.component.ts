@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public appPages = [
     { title: 'Timeline', url: '/flight-time-line', icon: 'airplane' },
+    { title: 'Map', url: '/map', icon: 'map' },
   ];
   constructor() { }
 }
