@@ -13,7 +13,17 @@
       <ion-title size="large">timeline</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div id="container">
-    <p>timeline content</p>
+  <div id="container" *ngFor="let flightlog of flightLogs; index as i;">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{flightlog.departurePlace}} -> {{flightlog.arrivalPlace}} /
+          {{flightlog.aircraft}}</ion-card-title>
+        <ion-card-subtitle>{{flightlog.date.toString()}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        CONTENT
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
