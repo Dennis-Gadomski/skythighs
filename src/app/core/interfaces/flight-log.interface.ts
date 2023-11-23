@@ -1,0 +1,30 @@
+export interface FlightLog {
+    id: string;
+    pilotId: string;
+    createdAt: string;
+    updatedAt: string;
+    date: string;
+    departurePlace: string;
+    departureTime: string;
+    arrivalPlace: string;
+    arrivalTime: string;
+    aircraft: string;
+    aircraftRegistration: string;
+    SE: number;
+    ME: number;
+    multiPilotTime: number | null;
+    flightTime: number;
+    flightTimePic: number | null;
+    flightTimeCP: number | null;
+    flightTimeDual: number | null;
+    flightTimeInstructor: number | null;
+    picName: string;
+    dayLanding: number;
+    nightLanding: number;
+    octNight: number | null;
+    octIFR: number | null;
+    fstdDate: string | null;
+    fstdType: string;
+    fstdTime: number | null;
+    remarks: string;
+}
