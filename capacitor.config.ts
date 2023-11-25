@@ -5,7 +5,8 @@ const config: CapacitorConfig = {
   appName: 'skythighs',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http',
+    cleartext: true,
   }
 };
 
