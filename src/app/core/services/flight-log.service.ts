@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { FlightLog } from '../interfaces/flight-log.interface';
 import { environment } from '../../../environments/environment';
 import { AirportVisit } from '../interfaces/airport-visit.interface';
+import { ResourceResponse } from '../interfaces/resource-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class FlightLogService {
   constructor(private http: HttpClient) { }
 
   getFlightLogs(): Observable<FlightLog[]> {
-    return this.http.get<{ data: FlightLog[] }>(`${environment.API_URL}/${this.FLIGHTS_ENDPOINT}`).pipe(
+    return this.http.get<ResourceResponse<FlightLog[]>>(`${environment.API_URL}/${this.FLIGHTS_ENDPOINT}`).pipe(
       map(response => response.data)
     );
   }
