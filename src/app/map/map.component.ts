@@ -3,13 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FlightLogService } from '../core/services/flight-log.service';
-import { FlightLog } from '../core/interfaces/flight-log.interface';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import { fromLonLat } from 'ol/proj';
+import { AirportService } from '../core/services/airport.service';
+import { forkJoin, mergeMap, of } from 'rxjs';
+import { AirportVisit } from '../core/interfaces/airport-visit.interface';
+import { Airport } from '../core/interfaces/airport.interface';
 
 @Component({
   selector: 'app-map',
@@ -23,17 +26,46 @@ import { fromLonLat } from 'ol/proj';
   ]
 })
 export class MapComponent implements OnInit {
-  flightLogs: FlightLog[] = [];
+  belgiumCenter = fromLonLat([4.4699, 50.5039]);
+
+  airportsVisited: AirportVisit[] = [];
+  airportData: Airport | null = null;
+
   map: Map | undefined;
 
-  constructor(private flightLogService: FlightLogService) { }
+  constructor(private flightLogService: FlightLogService, private airportServive: AirportService) { }
 
   ngOnInit(): void {
-    const belgiumCenter = fromLonLat([4.4699, 50.5039]);
+    this.flightLogService.getAirportsVisited().subscribe(airportsVisited => {
+      this.airportsVisited = airportsVisited;
+    });
+    this.initMap();
+  }
 
+  onSelectAirport(event: CustomEvent): void {
+    const selectedAirport = event.detail.value.airport;
+
+    if (selectedAirport) {
+      this.airportServive.getAiportDataByIdent(selectedAirport).subscribe(airportData => {
+        this.airportData = airportData
+        this.flyToLocation(parseFloat(this.airportData?.longitude_deg ?? '0'), parseFloat(this.airportData?.latitude_deg ?? '0'));
+      });
+    }
+  }
+
+  private flyToLocation(longitude: number, latitude: number): void {
+    const location = fromLonLat([longitude, latitude]);
+    this.map?.getView().animate({
+      center: location,
+      duration: 1500,
+      zoom: 11
+    });
+  }
+
+  private initMap(): void {
     this.map = new Map({
       view: new View({
-        center: belgiumCenter,
+        center: this.belgiumCenter,
         zoom: 8,
       }),
       layers: [
@@ -43,19 +75,14 @@ export class MapComponent implements OnInit {
       ],
       target: 'map'
     });
-    this.flightLogService.getFlightLogs().subscribe(flightLogs => {
-      this.flightLogs = flightLogs;
-    });
   }
 
-
-  customTileSource = new XYZ({
-    tileUrlFunction: function (tileCoord) {
+  private customTileSource = new XYZ({
+    tileUrlFunction: (tileCoord) => {
       const z = tileCoord[0];
       const x = tileCoord[1];
       const y = tileCoord[2];
       return `/assets/tiles/merged/512/latest/${z}/${x}/${y}.png`;
     }
   });
-
 }

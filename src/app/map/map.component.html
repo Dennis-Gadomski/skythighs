@@ -13,7 +13,18 @@
       <ion-title size="large">map</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div id="container">
-    <div id="map"></div>
+  <div class="map-page">
+    <div class="map-page__list">
+      <ion-list>
+        <ion-item>
+          <ion-select aria-label="Airports" interface="popover" placeholder="Select airport"
+            (ionChange)="onSelectAirport($event)">
+            <ion-select-option *ngFor="let airport of airportsVisited"
+              [value]="airport">{{airport.airport}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="map-page__map" id="map"></div>
   </div>
 </ion-content>
