@@ -9,7 +9,7 @@ import { ImageCacheEntry } from '../interfaces/image-cache-entry.interface';
 })
 export class AircraftImageService {
 
-  DEFAULT_URL = 'https://corsproxy.io/?https://cdn.jetphotos.com/full/8586390';
+  DEFAULT_URL = 'https://cdn.jetphotos.com/full/6/63853_1493621091.jpg';
 
   imageCache: { [aircraftRegistration: string]: ImageCacheEntry } = {};
   cacheDuration = 3600000;
@@ -41,11 +41,11 @@ export class AircraftImageService {
     const endpoint = `https://corsproxy.io/?https://www.jetphotos.com/photo/keyword/${query}`;
     return this.http.get(endpoint, { responseType: 'text' }).pipe(
       map(html => {
-        if (!html) return this.DEFAULT_URL;
-
         const image = this.extractImageSource(html);
 
-        if (!image) return this.DEFAULT_URL;
+        if (!image) {
+          return this.DEFAULT_URL;
+        }
 
         let split = image.slice(2).split('/');
         let id = split[split.length - 2] + '/' + split[split.length - 1];
@@ -62,6 +62,11 @@ export class AircraftImageService {
     const imageContainers = doc.querySelectorAll('.result__photoLink');
 
     const imageContainer = imageContainers[0];
-    return imageContainer.querySelector('img')?.src;
+
+    if (!imageContainer?.querySelector('img')?.src) {
+      return undefined;
+    }
+
+    return imageContainer?.querySelector('img')?.src;
   }
 }

@@ -40,15 +40,11 @@ export class TimeLineComponent implements OnInit {
     const uniqueRegistrations = new Set(flightLogs.map(log => log.aircraftRegistration));
 
     return from(Array.from(uniqueRegistrations)).pipe(
-      mergeMap(registration => this.getAircraftImage(registration).pipe(
+      mergeMap(registration => this.aircraftImageService.getImageForAircraft(registration).pipe(
         map(imageUrl => ({ registration, imageUrl }))
       )),
       toArray()
     );
-  }
-
-  getAircraftImage(registration: string): Observable<string> {
-    return this.aircraftImageService.getImageForAircraft(registration);
   }
 
   updateAircraftImages(images: { registration: string, imageUrl: string }[]): void {
