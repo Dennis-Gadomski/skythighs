@@ -47,7 +47,7 @@ export class AircraftImageService {
           return this.DEFAULT_URL;
         }
 
-        let split = image.slice(2).split('/');
+        let split = image.split('/');
         let id = split[split.length - 2] + '/' + split[split.length - 1];
 
         return `https://corsproxy.io/?https://cdn.jetphotos.com/full/${id}`;

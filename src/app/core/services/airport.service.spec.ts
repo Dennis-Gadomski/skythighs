@@ -30,12 +30,10 @@ fdescribe('AirportService', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
     const testIdent = 'TEST_IDENT';
 
-    // ACT
+    // ACT ASSERT
     service.getAiportDataByIdent(testIdent).subscribe(airport => {
       expect(airport).toEqual(mockResponse.data);
     });
-
-    // ASSERT
     const req = httpTestingController.expectOne(`${environment.API_URL}/airports/${testIdent}`);
     expect(req.request.method).toEqual('GET');
     req.flush(mockResponse);
