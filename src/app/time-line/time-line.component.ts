@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FlightLogService } from '../core/services/flight-log.service';
 import { FlightLog } from '../core/interfaces/flight-log.interface';
 import { AircraftImageService } from '../core/services/aircraft-image.service';
 import { Observable, from, map, mergeMap, toArray } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 
 @Component({
   selector: 'app-time-line',
@@ -19,9 +21,10 @@ import { Observable, from, map, mergeMap, toArray } from 'rxjs';
   styleUrls: ['./time-line.component.scss'],
 })
 export class TimeLineComponent implements OnInit {
-
   flightLogs: FlightLog[] = [];
   aircraftImages: { [key: string]: string } = {};
+
+  private destroyRef = inject(DestroyRef);
 
   constructor(private flightLogService: FlightLogService, private aircraftImageService: AircraftImageService) { }
 
@@ -31,7 +34,8 @@ export class TimeLineComponent implements OnInit {
         mergeMap(flightLogs => {
           this.flightLogs = flightLogs;
           return this.getUniqueAircraftImages(flightLogs);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(images => this.updateAircraftImages(images));
   }
