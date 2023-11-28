@@ -10,7 +10,7 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingCtrl: LoadingController) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.headers.get('skipLoading') === 'true') {
+    if (req.headers.get('skipLoading')) {
       return next.handle(req);
     }
 
