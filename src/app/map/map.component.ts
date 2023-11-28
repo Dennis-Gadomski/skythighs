@@ -10,7 +10,6 @@ import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import { fromLonLat } from 'ol/proj';
 import { AirportService } from '../core/services/airport.service';
-import { forkJoin, mergeMap, of } from 'rxjs';
 import { AirportVisit } from '../core/interfaces/airport-visit.interface';
 import { Airport } from '../core/interfaces/airport.interface';
 
@@ -29,6 +28,7 @@ export class MapComponent implements OnInit {
   belgiumCenter = fromLonLat([4.4699, 50.5039]);
 
   airportsVisited: AirportVisit[] = [];
+  selectedVisitedAirport: AirportVisit | null = null
   airportData: Airport | null = null;
 
   map: Map | undefined;
@@ -43,10 +43,10 @@ export class MapComponent implements OnInit {
   }
 
   onSelectAirport(event: CustomEvent): void {
-    const selectedAirport = event.detail.value.airport;
+    this.selectedVisitedAirport = event.detail.value;
 
-    if (selectedAirport) {
-      this.airportServive.getAiportDataByIdent(selectedAirport).subscribe(airportData => {
+    if (this.selectedVisitedAirport) {
+      this.airportServive.getAiportDataByIdent(this.selectedVisitedAirport.airport).subscribe(airportData => {
         this.airportData = airportData
         this.flyToLocation(parseFloat(this.airportData?.longitude_deg ?? '0'), parseFloat(this.airportData?.latitude_deg ?? '0'));
       });

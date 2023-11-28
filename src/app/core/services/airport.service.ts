@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Airport } from '../interfaces/airport.interface';
 import { environment } from 'src/environments/environment';
@@ -16,7 +16,9 @@ export class AirportService {
 
 
   getAiportDataByIdent(ident: string): Observable<Airport> {
-    return this.http.get<ResourceResponse<Airport>>(`${environment.API_URL}/${this.API_AIRPORTS}/${ident}`).pipe(
+    let headers = new HttpHeaders().set('skipLoading', 'true');
+
+    return this.http.get<ResourceResponse<Airport>>(`${environment.API_URL}/${this.API_AIRPORTS}/${ident}`, { headers }).pipe(
       map(airportData => airportData.data)
     );
   }

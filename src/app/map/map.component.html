@@ -30,13 +30,71 @@
       <div class="map-page__airport-info">
         <ion-card class="map-page__airport-info-card">
           <ion-card-header>
-            <ion-card-title>{{airportData?.ident ?? 'select an airport'}}</ion-card-title>
+            <ion-card-title>{{airportData?.ident ?? 'Select an airport'}}</ion-card-title>
             <ion-card-subtitle>{{airportData?.name}}</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content *ngIf="airportData">
-            <div>{{airportData.latitude_deg}}</div>
-            <div>{{airportData.latitude_deg}}</div>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Visited</ion-text></div>
+                    <div><ion-text color="secondary">{{selectedVisitedAirport?.arrivalCount}}</ion-text></div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Departed</ion-text></div>
+                    <div><ion-text color="secondary">{{selectedVisitedAirport?.departureCount}}</ion-text></div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Elevation</ion-text></div>
+                    <div><ion-text color="secondary">{{airportData.elevation_ft}}</ion-text></div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Lat - Long</ion-text></div>
+                    <div><ion-text color="secondary">{{airportData.latitude_deg}} -
+                        {{airportData.longitude_deg}}</ion-text></div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Country</ion-text></div>
+                    <div><ion-text color="secondary">{{airportData.iso_country}}</ion-text></div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Municipality</ion-text></div>
+                    <div><ion-text color="secondary">{{airportData.municipality}}</ion-text></div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Type</ion-text></div>
+                    <div><ion-text color="secondary">{{airportData.type}}</ion-text></div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="ion-justify-content-center">
+                    <div><ion-text>Region</ion-text></div>
+                    <div><ion-text color="secondary">{{airportData.iso_region}}</ion-text></div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-card-content>
         </ion-card>
       </div>
