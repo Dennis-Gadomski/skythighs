@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { FlightLogService } from '../core/services/flight-log.service';
 import { FlightLog } from '../core/interfaces/flight-log.interface';
 import { AircraftImageService } from '../core/services/aircraft-image.service';
-import { Observable, from, map, mergeMap, toArray } from 'rxjs';
+import { Observable, from, map, mergeMap, switchMap, toArray } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
@@ -31,7 +31,7 @@ export class TimeLineComponent implements OnInit {
   ngOnInit(): void {
     this.flightLogService.getFlightLogs()
       .pipe(
-        mergeMap(flightLogs => {
+        switchMap(flightLogs => {
           this.flightLogs = flightLogs;
           return this.getUniqueAircraftImages(flightLogs);
         }),
