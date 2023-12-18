@@ -1,0 +1,26 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #1e1e1e;
+    z-index: 10;
+    animation: flickerAnimation 1s infinite;
+}
+
+@keyframes flickerAnimation {
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
+}
