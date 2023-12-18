@@ -9,6 +9,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Timeline', url: '/flight-time-line', icon: 'airplane' },
     { title: 'Map', url: '/map', icon: 'map' },
+    { title: 'Flights list', url: '/flight-list', icon: 'list' },
   ];
   constructor(private platform: Platform) {
     this.platform.ready().then(() => {
