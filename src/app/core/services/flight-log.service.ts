@@ -11,8 +11,8 @@ import { ResourceResponse } from '../interfaces/resource-response.interface';
 })
 export class FlightLogService {
 
-  FLIGHTS_ENDPOINT = 'flights';
-  UNIQUE_AIRPORTS_ENDPOINT = 'flights/unique-airports';
+  private FLIGHTS_ENDPOINT = 'flights';
+  private UNIQUE_AIRPORTS_ENDPOINT = 'flights/unique-airports';
 
 
   constructor(private http: HttpClient) { }
@@ -21,6 +21,10 @@ export class FlightLogService {
     return this.http.get<ResourceResponse<FlightLog[]>>(`${environment.API_URL}/${this.FLIGHTS_ENDPOINT}`).pipe(
       map(response => response.data)
     );
+  }
+
+  getFlightLogById(id: string): Observable<FlightLog> {
+    return this.http.get<FlightLog>(`${environment.API_URL}/${this.FLIGHTS_ENDPOINT}/${id}`)
   }
 
   getAirportsVisited(): Observable<AirportVisit[]> {

@@ -8,6 +8,7 @@ import { AircraftImageService } from '../core/services/aircraft-image.service';
 import { Observable, from, map, mergeMap, switchMap, toArray } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-flight-list',
@@ -15,6 +16,7 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     FormsModule,
     IonicModule,
+    RouterModule
   ],
   standalone: true,
   templateUrl: './flight-list.component.html',

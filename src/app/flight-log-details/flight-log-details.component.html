@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>flight {{flightLog?.departureTime | date: 'd-M-yy'}}</ion-title>
+    <ion-text></ion-text>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="flightLog">
+  <div>
+    <div class="flight-info-cards">
+      <div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Flight</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label>PIC</ion-label><ion-text>{{flightLog.picName}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>flight time</ion-label><ion-text>{{flightLog.flightTime}} min</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>departure</ion-label><ion-text>{{flightLog.departurePlace}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>departure time</ion-label><ion-text>{{flightLog.departureTime | date:
+                  'shortTime'}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>arrival</ion-label><ion-text>{{flightLog.arrivalPlace}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>arrival time</ion-label><ion-text>{{flightLog.arrivalTime | date: 'shortTime'}}</ion-text>
+              </ion-item>
+            </ion-list>
+            <ion-card-subtitle>created {{flightLog.createdAt | date: 'd/M/yy'}}
+              - updated {{ flightLog.updatedAt | date: 'd/M/yy' }}</ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Aircraft</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label>type</ion-label><ion-text>{{flightLog.aircraft}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>registration</ion-label><ion-text>{{flightLog.aircraftRegistration}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>SE</ion-label><ion-text>{{flightLog.SE}}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label>ME</ion-label><ion-text>{{flightLog.ME}}</ion-text>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div>
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>ldg day</ion-label><ion-text>{{flightLog.dayLanding}}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label>ldg night</ion-label><ion-text>{{flightLog.nightLanding}}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label>time pic</ion-label><ion-text>{{flightLog.flightTimePic}}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label>time cp</ion-label><ion-text>{{flightLog.flightTimeCP}}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label>dual time</ion-label><ion-text>{{flightLog.flightTimeDual}}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label>instructor time</ion-label><ion-text>{{flightLog.flightTimeInstructor}}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label>remarks</ion-label><ion-text>{{flightLog.remarks}}</ion-text>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+@import '../../theme/variables.scss';
+
+.flight-info-cards {
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: $breakpoint-md) {
+        flex-direction: column;
+    }
+}
+
+.flight-info-cards>div {
+    flex: 1;
+    box-sizing: border-box;
+}
