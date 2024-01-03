@@ -1,0 +1,19 @@
+@import '../../../theme/variables.scss';
+
+.flight-edit-cards {
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: $breakpoint-md) {
+        flex-direction: column;
+    }
+}
+
+.flight-edit-cards>div {
+    flex: 1;
+    box-sizing: border-box;
+}
+
+ion-label {
+    min-width: 130px;
+}

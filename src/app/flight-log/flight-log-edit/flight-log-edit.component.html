@@ -1,3 +1,119 @@
-<p>
-  flight-log-edit works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>edit flight</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveFlightLog()">SAVE</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="flightLog">
+    <div class="flight-edit-cards">
+      <div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Flight</ion-card-title>
+          </ion-card-header>
+          <ion-card-content [formGroup]="flightLogFlightForm">
+            <ion-list>
+              <ion-item>
+                <ion-label>PIC</ion-label>
+                <ion-input [formControl]="flightLogFlightForm.controls.picName"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>flight time</ion-label>
+                <ion-input type="number" [formControl]="flightLogFlightForm.controls.flightTime"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>departure</ion-label>
+                <ion-input [formControl]="flightLogFlightForm.controls.departurePlace"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>departure time</ion-label>
+                <ion-datetime-button datetime="departure-time"></ion-datetime-button>
+              </ion-item>
+              <ion-item>
+                <ion-label>arrival</ion-label>
+                <ion-input [formControl]="flightLogFlightForm.controls.arrivalPlace"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>arrival time</ion-label>
+                <ion-datetime-button datetime="arrival-time"></ion-datetime-button>
+              </ion-item>
+            </ion-list>
+            <!-- <ion-card-subtitle>created
+              - updated</ion-card-subtitle> -->
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Aircraft</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label>type</ion-label><ion-input></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>registration</ion-label><ion-input></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>SE</ion-label><ion-input></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>ME</ion-label><ion-input></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div>
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>landing day</ion-label><ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>landing night</ion-label><ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>time pic</ion-label><ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>time cp</ion-label><ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>dual time</ion-label><ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>instructor time</ion-label><ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>remarks</ion-label><ion-input></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+
+<!-- TODO: extract to separate component -->
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime (ionChange)="updateTime($event, false)"
+      [value]="flightLogFlightForm.controls.departureTime.value.toISOString()" id="departure-time"></ion-datetime>
+  </ng-template>
+</ion-modal>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime (ionChange)="updateTime($event, true)"
+      [value]="flightLogFlightForm.controls.arrivalTime.value.toISOString()" id="arrival-time"></ion-datetime>
+  </ng-template>
+</ion-modal>

@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>flight {{flightLog?.departureTime | date: 'd-M-yy'}}</ion-title>
-    <ion-text></ion-text>
+    <ion-buttons slot="end">
+      <ion-button (click)="editFlightLog()">EDIT</ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="flightLog">
@@ -69,10 +72,10 @@
         <ion-card-content>
           <ion-list>
             <ion-item>
-              <ion-label>ldg day</ion-label><ion-text>{{flightLog.dayLanding}}</ion-text>
+              <ion-label>landing day</ion-label><ion-text>{{flightLog.dayLanding}}</ion-text>
             </ion-item>
             <ion-item>
-              <ion-label>ldg night</ion-label><ion-text>{{flightLog.nightLanding}}</ion-text>
+              <ion-label>landing night</ion-label><ion-text>{{flightLog.nightLanding}}</ion-text>
             </ion-item>
             <ion-item>
               <ion-label>time pic</ion-label><ion-text>{{flightLog.flightTimePic}}</ion-text>
