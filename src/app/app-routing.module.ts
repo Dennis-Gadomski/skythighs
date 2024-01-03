@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'map', loadComponent: () => import('./map/map.component').then(mod => mod.MapComponent) },
   { path: 'flight-list', loadComponent: () => import('./flight-list/flight-list.component').then(mod => mod.FlightListComponent) },
   { path: 'flight-log-details/:id', loadComponent: () => import('./flight-log/flight-log-details/flight-log-details.component').then(mod => mod.FlightLogDetailsComponent) },
+  { path: 'edit-flight-log/:id', loadComponent: () => import('./flight-log/flight-log-edit/flight-log-edit.component').then(mod => mod.FlightLogEditComponent) },
   { path: '', redirectTo: '/flight-time-line', pathMatch: 'full' },
   { path: '**', redirectTo: '/flight-time-line', pathMatch: 'full' },
 
