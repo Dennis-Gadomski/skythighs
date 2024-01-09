@@ -28,13 +28,13 @@
               </ion-item>
               <ion-item>
                 <ion-label>departure time</ion-label><ion-text>{{flightLog.departureTime | date:
-                  'shortTime'}}</ion-text>
+                  'HH:mm'}}</ion-text>
               </ion-item>
               <ion-item>
                 <ion-label>arrival</ion-label><ion-text>{{flightLog.arrivalPlace}}</ion-text>
               </ion-item>
               <ion-item>
-                <ion-label>arrival time</ion-label><ion-text>{{flightLog.arrivalTime | date: 'shortTime'}}</ion-text>
+                <ion-label>arrival time</ion-label><ion-text>{{flightLog.arrivalTime | date: 'HH:mm'}}</ion-text>
               </ion-item>
             </ion-list>
             <ion-card-subtitle>created {{flightLog.createdAt | date: 'd/M/yy'}}

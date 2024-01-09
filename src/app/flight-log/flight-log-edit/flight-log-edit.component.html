@@ -108,12 +108,13 @@
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
     <ion-datetime (ionChange)="updateTime($event, false)"
-      [value]="flightLogFlightForm.controls.departureTime.value.toISOString()" id="departure-time"></ion-datetime>
+      [value]="flightLogFlightForm.controls.departureTime.value.toISOString()" locale="nl-NL"
+      id="departure-time"></ion-datetime>
   </ng-template>
 </ion-modal>
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
-    <ion-datetime (ionChange)="updateTime($event, true)"
+    <ion-datetime (ionChange)="updateTime($event, true)" locale="nl-NL"
       [value]="flightLogFlightForm.controls.arrivalTime.value.toISOString()" id="arrival-time"></ion-datetime>
   </ng-template>
 </ion-modal>

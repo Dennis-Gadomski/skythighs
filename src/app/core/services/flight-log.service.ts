@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+
 import { FlightLog } from '../interfaces/flight-log.interface';
 import { environment } from '../../../environments/environment';
 import { AirportVisit } from '../interfaces/airport-visit.interface';
@@ -22,6 +23,11 @@ export class FlightLogService {
       map(response => response.data)
     );
   }
+
+  updateFlightLog(flightLog: FlightLog): Observable<FlightLog | null> {
+    return this.http.put<FlightLog>(`${environment.API_URL}/${this.FLIGHTS_ENDPOINT}/${flightLog.id}`, flightLog);
+  }
+
 
   getFlightLogById(id: string): Observable<FlightLog> {
     return this.http.get<FlightLog>(`${environment.API_URL}/${this.FLIGHTS_ENDPOINT}/${id}`)
